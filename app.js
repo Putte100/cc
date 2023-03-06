@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
     window.setInterval(function() {
         checkMove("threerow", 10);
         checkMove("threecolumn", 10);
-        moveDown();    
+        moveDown();
     }, 100);
    
 })
