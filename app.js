@@ -5,12 +5,15 @@ document.addEventListener("DOMContentLoaded", function() {
     let score=0;
 
     const candyColors=[
-        "red", 
-        "yellow", 
-        "orange", 
-        "purple",
-        "green",
-        "blue"
+        "#008000",
+        "#006400",
+        "#90EE90",
+        "#32CD32",
+        "#66FF00",
+        "#98FB98",
+        "#00FF40",
+        "#3FFF00",
+        "#39FF14"
     ]
 
     function createBoard(){
@@ -21,8 +24,8 @@ document.addEventListener("DOMContentLoaded", function() {
             square.setAttribute('id', i);
             square.setAttribute('draggable', true);
 
-            //square.innerHTML=i;  //Temporär
-            //square.classList.add("cen"); //Temporär
+            square.innerHTML=i;  //Temporär
+            square.classList.add("cen"); //Temporär
 
             grid.appendChild(square);
             squares.push(square);
@@ -120,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     //  X X X
                     //  X X X 
                     arrCase=[i, i+1, i+2, i+width, i+width+1, i+width+2, i+width*2, i+width*2+1, i+width*2+2];
-                    arrNoGo=[6,7,14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 48,49,50,51,52,53,54,55,56,57,58,59,60,61, 62, 63];
+                    arrNoGo=[6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63];
                     break;
                 case "diamond":
                     //    X
@@ -137,12 +140,16 @@ document.addEventListener("DOMContentLoaded", function() {
                     //    X
                     //      X
                     //        X
+                    arrCase=[i, i+width+1, i+width*2+2, i+width*3+3];
+                    arrNoGo=[5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63];
                     break;
                 case "fourrightdiagonal":
                     //        X
                     //      X
                     //    X
                     //  X
+                    arrCase=[i, i+width-1, i+width*2-2, i+width*3-3]
+                    arrNoGo=[0, 1, 2, 8, 9, 10, 16, 17, 18, 24, 25, 26, 32, 33, 34, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
                     break;    
                 default:
             }
@@ -164,6 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function moveDown(){
+        
         for(i=0;i<width;i++){
             if(squares[i].style.background === ""){
                 let randomColor=Math.floor(Math.random() * candyColors.length);
@@ -180,6 +188,14 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     window.setInterval(function() {
+        checkMove("bigpool", 1000)
+        checkMove("fiverow", 100);
+        checkMove("fivecolumn", 100);
+        checkMove("fourrow", 50);
+        checkMove("fourcolumn", 50);
+        checkMove("fourleftdiagonal", 30);
+        checkMove("fourrightdiagonal", 30);
+        checkMove("smallpool", 25);
         checkMove("threerow", 10);
         checkMove("threecolumn", 10);
         moveDown();
